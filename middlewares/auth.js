@@ -3,12 +3,11 @@ const NotValidEmailOrPassword = require('../errors/NotValidEmailOrPassword');
 const { JWT_SECRET } = require('../config');
 
 const handleAuthError = () => {
-  throw new NotValidEmailOrPassword('передан неверный логин или пароль');
+  throw new NotValidEmailOrPassword('произошла ошибка авторизации');
 };
 
 const extractBearerToken = (header) => header.replace('Bearer ', '');
 
-// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization || !authorization.startsWith('Bearer ')) {

@@ -3,7 +3,7 @@ const validator = require('validator');
 
 const validateMovieParams = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.number().required(),
+    id: Joi.string().length(24).hex(),
   }),
 });
 
@@ -41,21 +41,21 @@ const validateMovieBody = celebrate({
 const validateUsersBodySignUp = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().min(8),
-    name: Joi.string().min(2).max(30),
+    password: Joi.string().required().min(8),
+    name: Joi.string().required().min(2).max(30),
   }),
 });
 
 const validateUsersBodySignIn = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().min(8),
+    password: Joi.string().required().min(8),
   }),
 });
 
 const validateUsersBody = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
   }),
 });

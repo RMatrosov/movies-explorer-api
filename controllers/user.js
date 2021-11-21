@@ -74,6 +74,9 @@ const changeUserInfo = (req, res, next) => {
       }
       res.send({ data: user });
     }).catch((err) => {
+      if (err.name === 'MongoServerError' && err.code === 11000) {
+        throw new MongoServerError('Указан не правильный email');
+      }
       if (err.name === 'CastError') {
         throw new CastError('Переданы некорректные данные при создании пользователя');
       }

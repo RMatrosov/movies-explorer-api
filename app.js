@@ -9,6 +9,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const error = require('./middlewares/error');
 const { MONGO_URL } = require('./config');
 const router = require('./routes');
+const limiter = require('./middlewares/limiter');
 
 const { PORT = 3000 } = process.env;
 
@@ -31,7 +32,7 @@ const corsOption = {
     }
   },
 };
-
+app.use(limiter);
 app.use(cors(corsOption));
 
 app.use(bodyParser.urlencoded({
@@ -45,7 +46,6 @@ app.disable('x-powered-by');
 
 mongoose.connect(MONGO_URL);
 
-app.use(helmet());
 app.use(requestLogger);
 
 app.get('/crash-test', () => {

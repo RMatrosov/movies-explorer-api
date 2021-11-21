@@ -12,7 +12,7 @@ const getMovies = (req, res, next) => {
 
 const deleteMovies = (req, res, next) => {
   const owner = req.user._id;
-  Movie.findOne({ movieId: req.params.movieId }).then((deletedMovie) => {
+  Movie.findOne({ id: req.params._id }).then((deletedMovie) => {
     if (!deletedMovie) {
       throw new NotValidId('Карточка с указанным _id не найдена');
     }

@@ -7,7 +7,7 @@ const { validateMovieParams, validateMovieBody } = require('../middlewares/valid
 
 router.get('/movies', auth, getMovies);
 
-router.delete('/movies/:movieId', validateMovieParams, auth, deleteMovies);
+router.delete('/movies/:id', validateMovieParams, auth, deleteMovies);
 
 router.post('/movies', validateMovieBody, auth, createMovies);
 
